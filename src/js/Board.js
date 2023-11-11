@@ -5,10 +5,10 @@ class Board {
 
   log = [];
 
-  findEmpty() {
+  findItem(item = 0) {
     for (let row = 0; row < this.board.length; row++) {
       for (let col = 0; col < this.board.length; col++) {
-        if (this.board[row][col] === 0) {
+        if (this.board[row][col] === item) {
           return [row, col];
         }
       }
@@ -52,7 +52,7 @@ class Board {
   }
 
   up() {
-    const emptyLocation = this.findEmpty();
+    const emptyLocation = this.findItem();
     if (emptyLocation[0] > 0) {
       this.applyMove(
         {
@@ -64,7 +64,7 @@ class Board {
   }
 
   down() {
-    const emptyLocation = this.findEmpty();
+    const emptyLocation = this.findItem();
     if (emptyLocation[0] < this.board.length - 1) {
       this.applyMove(
         {
@@ -76,7 +76,7 @@ class Board {
   }
 
   right() {
-    const emptyLocation = this.findEmpty();
+    const emptyLocation = this.findItem();
     if (emptyLocation[1] < this.board.length - 1) {
       this.applyMove(
         {
@@ -88,7 +88,7 @@ class Board {
   }
 
   left() {
-    const emptyLocation = this.findEmpty();
+    const emptyLocation = this.findItem();
     if (emptyLocation[1] > 0) {
       this.applyMove(
         {
@@ -134,11 +134,16 @@ class Board {
     this.board[rowFrom][colFrom] = tempCell;
   }
 
-  move(cell) {
-    const row = cell[0] - 1;
-    const col = cell[1] - 1 ;
+  move(item) {
+    const cell = this.findItem(item);
+    console.log(item);
+    console.log(cell);
+
+    const row = cell[0];
+    const col = cell[1];
     const card = this.board[row][col];
 
+    let direction = '';
     let move = {
       from: [row, col],
       to: []
@@ -150,21 +155,22 @@ class Board {
     const upCell = row > 0 ? this.board[row - 1 ][col] : undefined;
     const downCell = row < this.board.length - 1 ? this.board[row + 1][col] : undefined;
 
-    console.log(
-      leftCell, rightCell, upCell, downCell
-    )
 
     if (leftCell === 0) {
       move.to = [row, col - 1]
+      direction = 'left';
     }
     if (rightCell === 0) {
       move.to = [row, col + 1]
+      direction = 'right';
     }
     if (upCell === 0) {
       move.to = [row - 1, col]
+      direction = 'up';
     }
     if (downCell === 0) {
       move.to = [row + 1, col]
+      direction = 'down';
     }
 
     if (upCell !== 0 && downCell !==0 && rightCell !==0 && leftCell !==0) {
@@ -175,9 +181,9 @@ class Board {
     this.log.push(move);
 
     return {
-      move: move,
       card: card,
-      finished: this.isFinished()
+      finished: this.isFinished(),
+      direction: direction
     }
   }
 }
