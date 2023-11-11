@@ -8,19 +8,20 @@ const movesCounter = document.getElementById('moves-counter');
 
 const board = new Board([]);
 const transforms = {};
+const boardSize = 5;
 
 startGameButton.addEventListener('click', () => {
-  board.randomize(3);
+  board.randomize(boardSize);
   console.log(board.board);
 
   const flatBoard = board.board.flat();
-  const className = 'cell-3x3'
+  const className = `cell-${boardSize}x${boardSize}`
   let content = [];
 
   startGameButton.innerHTML = 'Заново';
 
   flatBoard.forEach((item) => {
-    let image = item === 0 ? '' : `<img data-item="${item}" src="src/images/photo-Field/${3}/${item}.jpg" alt="">`;
+    let image = item === 0 ? '' : `<img data-item="${item}" src="src/images/photo-Field/${boardSize}/${item}.jpg" alt="">`;
     content.push(
       `<div class="cell ${className}">` +
       `<div class="image-wrapper">` +
