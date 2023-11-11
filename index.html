@@ -1,17 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS vite template</title>
+    <title>15th Slider Game</title>
+    <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
     <div id="app" class="hero">
-      <h1>Hello!</h1>
-      <span class="hero__image-wrapper">
-        <img src="src/images/img.svg">
-      </span>
+      <div class="main-field">
+        <div class="text-block">
+          <p class="text-title">Игра</p>
+          <p class="text-instruction">Инструкция:</p>
+          <p class="text-instruction-content">Текст инструкции</p>
+          <label for="select-field">Выбрать поле:</label>
+          <select name="Выбрать поле" id="select-field">
+            <optgroup>
+              <option value="3x3">3x3</option>
+              <option value="4x4">4x4</option>
+              <option value="6x6">6x6</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="main-window">
+          <div class="field">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell cell-final"></div>
+          </div>
+  
+          <div class="field-under">
+            <div>
+              <button class="text-start-game">Старт игры</button>
+            </div>
+            <div>
+              <p class="timer">03:56</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <script type="module" src="src/js/main.js"></script>
   </body>
 </html>
