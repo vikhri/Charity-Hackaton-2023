@@ -17,7 +17,7 @@ body {
   font-style: normal;
   font-size: 36px;
 
-  background-color: white;
+  background-color: #f2f2f2;
 }
 
 p {
@@ -161,19 +161,6 @@ p {
   //align-items: center;
 }
 
-.cells-3x3 {
-
-  /* display: none; */
-}
-
-.cells-4x4 {
-
-  display: none;
-}
-
-.cells-5x5 {
-  display: none;
-}
 
 .cell-3x3 {
   width: var(--cell-size-3x3);
@@ -195,7 +182,10 @@ p {
   background-color: #4C4848;
   cursor: pointer;
 
-  transition: transform 200ms linear;
+  img {
+    transition: transform 200ms linear;
+  }
+
 }
 
 .cell-final {
