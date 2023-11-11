@@ -1,6 +1,7 @@
 class Board {
   constructor(board) {
     this.board = board;
+    this.movesCounter = 0;
   }
 
   log = [];
@@ -29,25 +30,27 @@ class Board {
       this.board.push(r);
     }
 
-    const movesCount = 10;
+    let movesCount = 0;
 
-    for (let i = 0; i < movesCount; i++) {
+    for (let i = 0; i < 1000; i++) {
 
       let num = Math.floor(Math.random() * 4);
+      let result = false;
       switch (num) {
         case 0:
-          this.up();
+          result = this.up();
           break;
         case 1:
-          this.left();
+          result = this.left();
           break;
         case 2:
-          this.down();
+          result = this.down();
           break;
         case 3:
-          this.right();
+          result = this.right();
       }
-
+      if (result) movesCount++;
+      if (movesCount === 10) return;
     }
   }
 
@@ -60,7 +63,9 @@ class Board {
           to: [emptyLocation[0] - 1, emptyLocation[1]]
         }
       )
+      return true;
     }
+    return false;
   }
 
   down() {
@@ -72,7 +77,9 @@ class Board {
           to: [emptyLocation[0] + 1, emptyLocation[1]]
         }
       )
+      return true;
     }
+    return false;
   }
 
   right() {
@@ -84,7 +91,9 @@ class Board {
           to: [emptyLocation[0], emptyLocation[1] + 1]
         }
       )
+      return true;
     }
+    return false;
   }
 
   left() {
@@ -96,21 +105,32 @@ class Board {
           to: [emptyLocation[0], emptyLocation[1] - 1]
         }
       )
+      return true;
     }
+    return false;
   }
 
   rollback() {
 
-    if (this.log.length === 0) return 0;
+    if (this.log.length === 0) return null;
 
     let lastMove = this.log.pop();
+    const item = this.board[lastMove.to[0]][lastMove.to[1]];
+
+
     let reversedMove = {
       from: lastMove.to,
       to: lastMove.from
     }
     this.applyMove(reversedMove);
 
-    return this.log.length;
+    this.movesCounter++;
+
+    return {
+     item: item,
+     movesCount: this.log.length,
+     direction: this.calculateDirection(reversedMove.from, reversedMove.to)
+    }
   }
 
   isFinished() {
@@ -134,6 +154,13 @@ class Board {
     this.board[rowFrom][colFrom] = tempCell;
   }
 
+  calculateDirection(from, to) {
+    if (from[0] < to[0]) return 'down';
+    if (from[0] > to[0]) return 'up';
+    if (from[1] < to[1]) return 'right';
+    if (from[1] > to[1]) return 'left';
+  }
+
   move(item) {
     const cell = this.findItem(item);
     console.log(item);
@@ -143,7 +170,6 @@ class Board {
     const col = cell[1];
     const card = this.board[row][col];
 
-    let direction = '';
     let move = {
       from: [row, col],
       to: []
@@ -158,19 +184,15 @@ class Board {
 
     if (leftCell === 0) {
       move.to = [row, col - 1]
-      direction = 'left';
     }
     if (rightCell === 0) {
       move.to = [row, col + 1]
-      direction = 'right';
     }
     if (upCell === 0) {
       move.to = [row - 1, col]
-      direction = 'up';
     }
     if (downCell === 0) {
       move.to = [row + 1, col]
-      direction = 'down';
     }
 
     if (upCell !== 0 && downCell !==0 && rightCell !==0 && leftCell !==0) {
@@ -180,10 +202,12 @@ class Board {
     this.applyMove(move);
     this.log.push(move);
 
+    this.movesCounter++;
+
     return {
       card: card,
       finished: this.isFinished(),
-      direction: direction
+      direction: this.calculateDirection(move.from, move.to)
     }
   }
 }
