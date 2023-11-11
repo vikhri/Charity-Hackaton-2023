@@ -1,3 +1,3 @@
 import '../pcss/style.pcss'
 
-import './inner.js'
+import './GameEvents.js'
