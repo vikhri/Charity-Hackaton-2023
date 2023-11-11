@@ -1,9 +1,9 @@
 :root {
-  --cell-size-3x3: calc((var(--field-size) / 3) * var(--cell-size-k));
-  --cell-size-4x4: calc((var(--field-size) / 4) * var(--cell-size-k));
-  --cell-size-5x5: calc((var(--field-size) / 5) * var(--cell-size-k));
-  --cell-size-k: 0.98;
-  --field-size: 475px;
+  --cell-size-3x3: calc((var(--field-size) / 3));
+  --cell-size-4x4: calc((var(--field-size) / 4));
+  --cell-size-5x5: calc((var(--field-size) / 5));
+  --cell-size-k: 1;
+  --field-size: 480px;
 
   --color-back: #4C4848;
   --color-front: #EAEAEA;
@@ -133,9 +133,8 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* justify-self: center; */
-  width: 553px;
-  height: 716px;
+  padding: 30px;
+
 
   background-color: #EAEAEA;
 }
@@ -144,22 +143,23 @@ p {
   display: flex;
   width: var(--field-size);
   height: var(--field-size);
-
   background-color: #4C4848;
 }
 
 .cells {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
+  background-color: #4C4848;
+  //align-items: center;
 }
 
 .cells-3x3 {
+
   /* display: none; */
 }
 
 .cells-4x4 {
+
   display: none;
 }
 
@@ -184,9 +184,10 @@ p {
 
 .cell {
   box-sizing: border-box;
-
+  background-color: #4C4848;
   cursor: pointer;
-  background-color: white;
+
+  transition: transform 200ms linear;
 }
 
 .cell-final {
@@ -201,6 +202,7 @@ p {
   width: 463px;
   justify-content: space-between;
   align-items: center;
+  padding-top: 20px;
 
 }
 
