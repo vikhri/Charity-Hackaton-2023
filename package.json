@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
+    "firebase": "^10.6.0",
     "normalize.css": "^8.0.1",
+    "on-change": "^4.0.2",
     "postcss-mixins": "^9.0.4"
   }
 }
