@@ -5,10 +5,19 @@ const gameBoard = document.getElementById('game-board');
 const cells = document.querySelectorAll('.cell');
 const undoButton = document.getElementById('undo-button');
 const movesCounter = document.getElementById('moves-counter');
+const tabs = document.querySelectorAll('.js-board-size');
 
 const board = new Board([]);
 const transforms = {};
-const boardSize = 5;
+let boardSize = 5;
+
+tabs.forEach((tab) => {
+  tab.addEventListener('change', () => {
+    if (tab.checked === true) {
+        boardSize = tab.value;
+    }
+  });
+})
 
 startGameButton.addEventListener('click', () => {
   board.randomize(boardSize);
