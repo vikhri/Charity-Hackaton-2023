@@ -182,16 +182,4 @@ class Board {
   }
 }
 
-const testBoard = new Board([
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 0],
-]);
-
-const board1 = new Board([]);
-
-
-
-
-testBoard.randomize(5);
-
+export default Board;
