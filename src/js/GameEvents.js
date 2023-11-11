@@ -9,7 +9,7 @@ const tabs = document.querySelectorAll('.js-board-size');
 
 const board = new Board([]);
 const transforms = {};
-let boardSize = 5;
+let boardSize = 4;
 
 tabs.forEach((tab) => {
   tab.addEventListener('change', () => {
