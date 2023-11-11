@@ -15,7 +15,20 @@ class Board {
     }
   }
 
-  randomize() {
+  randomize(size) {
+
+    this.board = [];
+
+
+    for (let row = 0; row < size; row++) {
+      const r = [];
+      for (let col = 0; col < size; col++) {
+        const cell = size * row + col + 1;
+        r.push(cell === size * size ? 0 : cell);
+      }
+      this.board.push(r);
+    }
+
     const movesCount = 10;
 
     for (let i = 0; i < movesCount; i++) {
@@ -175,9 +188,10 @@ const testBoard = new Board([
   [7, 8, 0],
 ]);
 
+const board1 = new Board([]);
 
 
 
-testBoard.randomize();
-console.log(testBoard.board);
-console.log(testBoard.log)
+
+testBoard.randomize(5);
+
