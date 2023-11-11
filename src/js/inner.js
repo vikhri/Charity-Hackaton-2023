@@ -5,6 +5,87 @@ class Board {
 
   log = [];
 
+  findEmpty() {
+    for (let row = 0; row < this.board.length; row++) {
+      for (let col = 0; col < this.board.length; col++) {
+        if (this.board[row][col] === 0) {
+          return [row, col];
+        }
+      }
+    }
+  }
+
+  randomize() {
+    const movesCount = 10;
+
+    for (let i = 0; i < movesCount; i++) {
+
+      let num = Math.floor(Math.random() * 4);
+      switch (num) {
+        case 0:
+          this.up();
+          break;
+        case 1:
+          this.left();
+          break;
+        case 2:
+          this.down();
+          break;
+        case 3:
+          this.right();
+      }
+
+    }
+  }
+
+  up() {
+    const emptyLocation = this.findEmpty();
+    if (emptyLocation[0] > 0) {
+      this.applyMove(
+        {
+          from: emptyLocation,
+          to: [emptyLocation[0] - 1, emptyLocation[1]]
+        }
+      )
+    }
+  }
+
+  down() {
+    const emptyLocation = this.findEmpty();
+    if (emptyLocation[0] < this.board.length - 1) {
+      this.applyMove(
+        {
+          from: emptyLocation,
+          to: [emptyLocation[0] + 1, emptyLocation[1]]
+        }
+      )
+    }
+  }
+
+  right() {
+    const emptyLocation = this.findEmpty();
+    if (emptyLocation[1] < this.board.length - 1) {
+      this.applyMove(
+        {
+          from: emptyLocation,
+          to: [emptyLocation[0], emptyLocation[1] + 1]
+        }
+      )
+    }
+  }
+
+  left() {
+    const emptyLocation = this.findEmpty();
+    if (emptyLocation[1] > 0) {
+      this.applyMove(
+        {
+          from: emptyLocation,
+          to: [emptyLocation[0], emptyLocation[1] - 1]
+        }
+      )
+    }
+  }
+
   rollback() {
 
     if (this.log.length === 0) return 0;
@@ -92,15 +173,11 @@ const testBoard = new Board([
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 0],
-])
+]);
 
 
-console.log(testBoard.move([2,3]));
-console.log(testBoard.move([1,3]));
-console.log(testBoard);
-console.log(testBoard.rollback());
-console.log(testBoard.rollback());
-console.log(testBoard);
-console.log(testBoard.log);
 
 
+testBoard.randomize();
+console.log(testBoard.board);
+console.log(testBoard.log)
