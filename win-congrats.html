@@ -3,11 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="win-congrats.css" />
     <title>Congratulations! You win!</title>
   </head>
   <body>
-    <div class="win-parent">
+    <dialog class="win-parent" open>
       <div class="win-pop-window">
         <p>Победа!</p>
         <p>
@@ -19,6 +18,7 @@
         </form>
         <div class="buttons"><button class="win-buttons ok-button">ОК!</button><button class="win-buttons cancel-button">Отмена</button></div>
       </div>
-    </div>
+    </dialog>
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>
