@@ -13,7 +13,7 @@
 1. Feature 1
 2. Feature 2
 3. Feature 3
-  
+4. Feature 4
 
 Чтобы развернуть проект локально, выполните команду:   
 `vite preview`
