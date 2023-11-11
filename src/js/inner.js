@@ -1,10 +1,22 @@
-const move = {
-  from: [3,2],
-  to: [3,3]
-};
 class Board {
   constructor(board) {
     this.board = board;
+  }
+
+  log = [];
+
+  rollback() {
+
+    if (this.log.length === 0) return 0;
+
+    let lastMove = this.log.pop();
+    let reversedMove = {
+      from: lastMove.to,
+      to: lastMove.from
+    }
+    this.applyMove(reversedMove);
+
+    return this.log.length;
   }
 
   isFinished() {
@@ -66,6 +78,7 @@ class Board {
     }
 
     this.applyMove(move);
+    this.log.push(move);
 
     return {
       move: move,
@@ -83,5 +96,11 @@ const testBoard = new Board([
 
 
 console.log(testBoard.move([2,3]));
-console.log(testBoard.move([3,3]));
+console.log(testBoard.move([1,3]));
+console.log(testBoard);
+console.log(testBoard.rollback());
+console.log(testBoard.rollback());
+console.log(testBoard);
+console.log(testBoard.log);
+
 
