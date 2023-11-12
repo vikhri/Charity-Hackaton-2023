@@ -7,6 +7,7 @@ const cells = document.querySelectorAll('.cell');
 const undoButton = document.getElementById('undo-button');
 const movesCounter = document.getElementById('moves-counter');
 const tabs = document.querySelectorAll('.js-board-size');
+const winDialog = document.getElementById('win-dialog');
 
 const board = new Board([]);
 const transforms = {};
@@ -78,8 +79,9 @@ startGameButton.addEventListener('click', () => {
       console.log(response);
 
       if (response.finished) {
-        const playerName = prompt('Победа! Введите ваше имя для добавления в таблицу лидеров!');
-        state.name = playerName ?? 'Аноним';
+        setTimeout(()=> {winDialog.showModal()}, 700)
+        // const playerName = prompt('Победа! Введите ваше имя для добавления в таблицу лидеров!');
+        // state.name = playerName ?? 'Аноним';
         sendUserData(state);
       }
 
@@ -107,6 +109,7 @@ startGameButton.addEventListener('click', () => {
     })
   })
 })
+
 
 undoButton.addEventListener('click', () => {
   const response = board.rollback();
