@@ -90,8 +90,13 @@ p {
   line-height: 1.2em;
 }
 
-.text-instruction {
+.text-subtitle{
+  font-size: 1.2em;
   margin-top: 0.8em;
+}
+
+.text-plain {
+  line-height: 1.3em;
 }
 
 .order-info {
@@ -114,11 +119,11 @@ p {
 
 .choose-field-group label {
   display: inline-block;
-  padding: 0.6em 1.1em;
-
-  line-height: 1em;
-
-  border: 3px solid var(--color-accent-highlight);
+	padding: 0.6em 1.1em;
+  
+	line-height: 1em;
+  
+	border: 3px solid var(--color-accent);
   border-right: none;
   user-select: none;
   cursor: pointer;
@@ -130,12 +135,13 @@ p {
 
 .choose-field-group .choose-field-group-item:last-child label {
   border-radius: 0 2em 2em 0;
-  border-right: 3px solid var(--color-accent-highlight);
+  border-right: 3px solid var(--color-accent);
+
 }
 
 .choose-field-group input[type='radio']:checked + label {
   color: white;
-  background-color: var(--color-accent-highlight);
+  background-color: var(--color-accent);
 }
 
 .choose-field-group label:hover {
