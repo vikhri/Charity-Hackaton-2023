@@ -1,4 +1,5 @@
 import Board from "./Board.js";
+import sendUserData from "./Finish.js";
 
 const startGameButton = document.getElementById('start-game-button');
 const gameBoard = document.getElementById('game-board');
@@ -19,7 +20,31 @@ tabs.forEach((tab) => {
   });
 })
 
+const state = {
+  name: null,
+  time: null,
+};
+
+const render = (state) => {
+  document.querySelector('.timer').textContent = state.time;
+};
+
+let currentInterval;
+const startTimer = (startOver = false) => {
+  let startDate = startOver ? new Date() : new Date();
+  const updateTimer = () => {
+    const currentDate = new Date();
+    const passedSeconds = Math.floor((currentDate - startDate) / 1000);
+    state.time = `${Math.floor(passedSeconds / 60)}:${(passedSeconds % 60) < 10 ? '0' : ''}${passedSeconds % 60}`;
+    render(state);
+  }
+  clearInterval(currentInterval);
+  currentInterval = setInterval(updateTimer, 1000);
+};
+
 startGameButton.addEventListener('click', () => {
+  startTimer(true);
+
   board.randomize(boardSize);
   console.log(board.board);
 
@@ -51,6 +76,12 @@ startGameButton.addEventListener('click', () => {
       const response = board.move(item);
 
       console.log(response);
+
+      if (response.finished) {
+        const playerName = prompt('Победа! Введите ваше имя для добавления в таблицу лидеров!');
+        state.name = playerName ?? 'Аноним';
+        sendUserData(state);
+      }
 
       if (response === null) return;
 
