@@ -217,7 +217,7 @@ p {
   cursor: pointer;
 
   img {
-    transition: transform 200ms ease-in-out;
+    transition: transform 200ms cubic-bezier(0.75, 0.5, 0.01, 1);
   }
 
 }
@@ -253,7 +253,6 @@ button {
   border-radius: 2em;
 
   cursor: pointer;
-  background-color: var(--color-accent);
 }
 
 button:hover {
@@ -264,31 +263,23 @@ button:active {
   background-color: var(--color-accent-active);
 }
 
-.text-start-game {
+.dflt-button {
   font-size: 1em;
-
   color: white;
+
+  background-color: var(--color-accent);
 }
 
-.undo {
-  height: 2.4em;
-  width: 2.4em;
-
-  transform: scale(-1);
-  color: var(--color-accent);
-  fill: currentColor;
-}
-
-.button-undo {
+.secondary-button {
   background-color: transparent;
   border: 2px solid var(--color-accent);
 }
 
-.button-undo:hover {
+.secondary-button:hover {
   background-color: var(--color-accent-hover);
 }
 
-.button-undo:active {
+.secondary-button:active {
   border-color: var(--color-accent-active);
 }
 
