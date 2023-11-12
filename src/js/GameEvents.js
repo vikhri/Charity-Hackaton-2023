@@ -3,7 +3,6 @@ import sendUserData from "./Finish.js";
 
 const startGameButton = document.getElementById('start-game-button');
 const gameBoard = document.getElementById('game-board');
-const cells = document.querySelectorAll('.cell');
 const undoButton = document.getElementById('undo-button');
 const movesCounter = document.getElementById('moves-counter');
 const tabs = document.querySelectorAll('.js-board-size');
