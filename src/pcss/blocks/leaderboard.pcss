@@ -1,34 +1,29 @@
-@font-face {
-  font-weight: 400;
-  font-family: Rubik;
-  src: url('./src/fonts/Rubik-Regular.woff2');
+.text-show-leaderboard {
+  text-decoration: underline;
+
+  text-align: center;
+  padding-top: 1em;
+
+  color: var(--color-accent);
 }
 
-@font-face {
-  font-weight: 700;
-  font-family: Rubik;
-  src: url('./src/fonts/Rubik-Medium.woff2');
-}
-
-.leaderbord {
-  position: relative;
-  margin: 0 auto;
-  width: 90vw;
-  max-width: 600px;
-
-  font-family: Rubik;
-  font-size: 36px;
-  font-weight: 400;
+.leaderboard {
+  max-width: var(--main-width);
+  margin-top: 60px;
   text-align: center;
 }
 
 table {
-  text-align: center;
-  width: 80vw;
-  max-width: 600px;
-  background-color: #ededed;
-  border-radius: 13px;
-  border: 1px solid #bc1b99;
+  min-width: 50vw;
+}
+
+thead {
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+tbody {
+  font-size: 0.7em;
 }
 
 tr,
