@@ -32,7 +32,7 @@ const state = {
   moves: null,
 };
 
-const render = (state) => {
+const render = () => {
   document.querySelector('.timer').textContent = state.time;
 };
 
@@ -43,13 +43,15 @@ const startTimer = (startOver = false) => {
     const currentDate = new Date();
     const passedSeconds = Math.floor((currentDate - startDate) / 1000);
     state.time = `${Math.floor(passedSeconds / 60)}:${passedSeconds % 60 < 10 ? '0' : ''}${passedSeconds % 60}`;
-    render(state);
+    render();
   };
   clearInterval(currentInterval);
   currentInterval = setInterval(updateTimer, 1000);
 };
 
 startGameButton.addEventListener('click', () => {
+  state.time = '0:00';
+  render();
   startTimer(true);
 
   board.randomize(boardSize);
@@ -78,6 +80,7 @@ startGameButton.addEventListener('click', () => {
       console.log(response);
 
       if (response.finished) {
+        clearInterval(currentInterval);
         setTimeout(() => {
           winDialog.showModal();
         }, 700);
