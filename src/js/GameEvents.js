@@ -1,5 +1,6 @@
 import Board from './Board.js';
 import sendUserData from './Finish.js';
+import renderLeaderboard from './Leaderboard.js';
 
 const startGameButton = document.getElementById('start-game-button');
 const gameBoard = document.getElementById('game-board');
@@ -10,6 +11,7 @@ const winDialog = document.getElementById('win-dialog');
 const form = document.getElementById('user-name-form');
 const username = document.getElementById('user-name-input');
 const cancelButton = document.getElementById('cancel-button');
+const showLeaderboard = document.querySelector('.text-show-leaderboard');
 
 const board = new Board([]);
 const transforms = {};
@@ -143,3 +145,7 @@ form.addEventListener('submit', (e) => {
 cancelButton.addEventListener('click', () => {
   winDialog.close();
 });
+
+showLeaderboard.addEventListener('click', (e) => {
+  renderLeaderboard();
+})
