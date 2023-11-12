@@ -12,7 +12,7 @@ const form = document.getElementById('user-name-form');
 const username = document.getElementById('user-name-input');
 const cancelButton = document.getElementById('cancel-button');
 const showLeaderboardButton = document.getElementById('show-leaderboard');
-const leaderboardContainer = document.getElementById('leaderboard-container');
+const leaderboardContainer = document.getElementById('leaderboard');
 const showLeaderboard = document.querySelector('.text-show-leaderboard');
 
 const board = new Board([]);
