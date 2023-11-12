@@ -3,6 +3,7 @@
   --cell-size-4x4: calc((var(--field-size) / 4));
   --cell-size-5x5: calc((var(--field-size) / 5));
 
+  --main-width: 1240px;
   --main-window-size: 540px;
   --field-size: calc(var(--main-window-size) * 0.85);
 
@@ -26,7 +27,6 @@ body {
   font-family: 'Rubik', sans-serif;
   font-style: normal;
   font-size: 36px;
-  /* font-size: calc(var(--main-window-size) / 15); */
 
   background-color: #f2f2f2;
 
@@ -43,25 +43,23 @@ p {
   line-height: 1.65em;
 }
 
-
-
 .hero {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 5vw 0;
-
   width: 100%;
+  row-gap: 2em;
 }
 
 .main-field {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap-reverse;
   gap: 1.5em;
-  width: 1440px;
-  justify-content: space-around;
-  align-items: center;
-
+  width: 100vw;
+  max-width: var(--main-width);
 }
 
 .main-field .section {
@@ -72,8 +70,6 @@ p {
 .text-block {
   display: flex;
   width: var(--main-window-size);
-  /* height: calc(var(--main-window-size) * 1.3); */
-  /* height: 100%; */
   flex-direction: column;
   justify-content: space-between;
   
@@ -82,20 +78,12 @@ p {
   }
 }
 
-.text-block > * {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 2;
-}
-
 .text-block-texts {
   display: flex;
   flex-direction: column;
   flex-shrink: 25;
-  
   margin-bottom: 1em;
 }
-
 
 .text-title {
   font-size: 1.75em;
@@ -106,8 +94,6 @@ p {
   margin-top: 0.8em;
 }
 
-
-
 .order-info {
   order: 2;
 }
@@ -116,16 +102,9 @@ p {
 .choose-field-group {
   display: flex;
   overflow: hidden;
-
-  /* @media (max-width: 400px) {
-    flex-direction: column;
-    align-items: center;
-  } */
-
 }
 
 .choose-field-group-item {
-  display: inline-block;
   float: left;
 }
 
@@ -135,33 +114,24 @@ p {
 
 .choose-field-group label {
   display: inline-block;
-	cursor: pointer;
 	padding: 0.6em 1.1em;
+  
 	line-height: 1em;
+  
 	border: 3px solid var(--color-accent-highlight);
   border-right: none;
 	user-select: none;
-
-  /* @media (max-width: 600px) {
-    border-right: 3px solid var(--color-accent-highlight);
-  } */
+	cursor: pointer;
 }
 
 .choose-field-group .choose-field-group-item:first-child label {
-  border-radius: 6px 0 0 6px;
-
-  /* @media (max-width: 400px) {
-    border-radius: 6px 6px 0 0;
-  } */
+  border-radius: 2em 0 0 2em;
 }
 
 .choose-field-group .choose-field-group-item:last-child label {
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 2em 2em 0;
   border-right: 3px solid var(--color-accent-highlight);
-  
-  /* @media (max-width: 400px) {
-    border-radius: 0 0 6px 6px;
-  } */
+
 }
 
 .choose-field-group input[type="radio"]:checked + label {
@@ -173,13 +143,36 @@ p {
   background-color: var(--color-accent-hover);
 }
 
+.text-show-leaderboard {
+  text-decoration: underline;
+
+  text-align: center;
+  padding-top: 1em;
+
+  color: var(--color-accent);
+}
+
+.show-leaderboard:hover .leaderboard {
+  background-color: rgb(210, 127, 255);
+}
+
+.leaderboard {
+  max-width: var(--main-width);
+  width: 100vw;
+
+  height: 500px;
+
+  border: 3px solid grey;
+  background-color: aquamarine;
+  
+}
+
 .main-window {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   width: var(--main-window-size);
-  /* height: calc(var(--main-window-size) * 1.3); */
   padding: 1.2em 1em;
 
   background-color: white;
@@ -190,14 +183,15 @@ p {
   display: flex;
   width: var(--field-size);
   height: var(--field-size);
+
   background-color: #4C4848;
 }
 
 .cells {
   display: flex;
   flex-wrap: wrap;
+
   background-color: #4C4848;
-  //align-items: center;
 }
 
 
@@ -218,6 +212,7 @@ p {
 
 .cell {
   box-sizing: border-box;
+
   background-color: #4C4848;
   cursor: pointer;
 
@@ -247,11 +242,9 @@ p {
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-
 }
 
 button {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -259,6 +252,7 @@ button {
   border: none;
   border-radius: 2em;
 
+  cursor: pointer;
   background-color: var(--color-accent);
 }
 
@@ -271,15 +265,16 @@ button:active {
 }
 
 .text-start-game {
-  color: white;
   font-size: 1em;
+
+  color: white;
 }
 
 .undo {
   height: 2.4em;
   width: 2.4em;
-  transform: scale(-1);
 
+  transform: scale(-1);
   color: var(--color-accent);
   fill: currentColor;
 }
@@ -303,7 +298,6 @@ button:active {
 }
 
 .text-undo {
-  /* color: white; */
   background-color: transparent;
   border: 2px solid var(--color-accent);
 }
