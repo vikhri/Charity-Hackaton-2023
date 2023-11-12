@@ -49,7 +49,7 @@ startGameButton.addEventListener('click', () => {
   startTimer(true);
 
   board.randomize(boardSize);
-  console.log(board.board);
+  movesCounter.innerHTML = board.movesCounter;
 
   const flatBoard = board.board.flat();
   const className = `cell-${boardSize}x${boardSize}`
@@ -147,3 +147,7 @@ form.addEventListener('submit', (e) => {
   winDialog.close();
   username.value = '';
 })
+
+
+
+
