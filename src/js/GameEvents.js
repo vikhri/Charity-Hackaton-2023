@@ -49,6 +49,40 @@ const startTimer = (startOver = false) => {
   currentInterval = setInterval(updateTimer, 1000);
 };
 
+const doMove = (item) => {
+  if (item === null) return;
+  const response = board.move(item);
+  const pic = gameBoard.querySelector(`[data-item="${item}"]`);
+
+
+  if (response.finished) {
+    clearInterval(currentInterval);
+    setTimeout(() => {
+      winDialog.showModal();
+    }, 700);
+  }
+
+  if (response === null) return;
+
+  switch (response.direction) {
+    case 'left':
+      transforms[item][0] -= 100;
+      break;
+    case 'right':
+      transforms[item][0] += 100;
+      break;
+    case 'up':
+      transforms[item][1] -= 100;
+      break;
+    case 'down':
+      transforms[item][1] += 100;
+      break;
+  }
+
+  pic.style.transform = `translate(${transforms[item][0]}%,${transforms[item][1]}%)`;
+
+  movesCounter.innerHTML = board.movesCounter;
+}
 startGameButton.addEventListener('click', () => {
   state.time = '0:00';
   render();
@@ -75,37 +109,8 @@ startGameButton.addEventListener('click', () => {
   gameBoard.querySelectorAll('img').forEach((pic) => {
     pic.addEventListener('click', () => {
       const item = parseInt(pic.dataset.item);
-      const response = board.move(item);
+      doMove(item);
 
-      console.log(response);
-
-      if (response.finished) {
-        clearInterval(currentInterval);
-        setTimeout(() => {
-          winDialog.showModal();
-        }, 700);
-      }
-
-      if (response === null) return;
-
-      switch (response.direction) {
-        case 'left':
-          transforms[item][0] -= 100;
-          break;
-        case 'right':
-          transforms[item][0] += 100;
-          break;
-        case 'up':
-          transforms[item][1] -= 100;
-          break;
-        case 'down':
-          transforms[item][1] += 100;
-          break;
-      }
-
-      pic.style.transform = `translate(${transforms[item][0]}%,${transforms[item][1]}%)`;
-
-      movesCounter.innerHTML = board.movesCounter;
     });
   });
 });
@@ -154,3 +159,27 @@ showLeaderboardButton.addEventListener('click', () => {
   renderLeaderboard();
   leaderboardContainer.style.opacity = '1';
 });
+
+
+document.addEventListener('keydown', (ev) => {
+
+
+  if(ev.key === 'ArrowDown') {
+    ev.preventDefault();
+    doMove(board.getMoveDown());
+  }
+  if(ev.key === 'ArrowUp') {
+    ev.preventDefault();
+    doMove(board.getMoveUp());
+  }
+  if(ev.key === 'ArrowLeft') {
+    ev.preventDefault();
+    doMove(board.getMoveLeft());
+  }
+  if(ev.key === 'ArrowRight') {
+    ev.preventDefault();
+    doMove(board.getMoveRight());
+
+  }
+
+})

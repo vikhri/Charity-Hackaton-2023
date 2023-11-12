@@ -162,8 +162,34 @@ class Board {
     if (from[1] > to[1]) return 'left';
   }
 
+  getMoveDown() {
+    const emptyZone = this.findItem(0);
+    if (emptyZone[0] < 1) return null;
+    const value = this.board[emptyZone[0] - 1][emptyZone[1]];
+    return value;
+  }
+  getMoveUp() {
+    const emptyZone = this.findItem(0);
+    if (emptyZone[0] >= this.board.length - 1) return null;
+    const value = this.board[emptyZone[0] + 1][emptyZone[1]];
+    return value;
+  }
+  getMoveRight() {
+    const emptyZone = this.findItem(0);
+    if (emptyZone[1] < 1) return null;
+    const value = this.board[emptyZone[0]][emptyZone[1] - 1];
+    return value;
+  }
+  getMoveLeft() {
+    const emptyZone = this.findItem(0);
+    if (emptyZone[1] >= this.board.length - 1) return null;
+    const value = this.board[emptyZone[0]][emptyZone[1] + 1];
+    return value;
+  }
+
   move(item) {
     if (this.isFinished()) return null;
+
 
     const cell = this.findItem(item);
 
