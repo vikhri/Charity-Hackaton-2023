@@ -163,8 +163,8 @@ class Board {
 
   move(item) {
     const cell = this.findItem(item);
-    console.log(item);
-    console.log(cell);
+    // console.log(item);
+    // console.log(cell);
 
     const row = cell[0];
     const col = cell[1];

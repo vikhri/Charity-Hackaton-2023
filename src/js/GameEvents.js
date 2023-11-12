@@ -8,6 +8,8 @@ const undoButton = document.getElementById('undo-button');
 const movesCounter = document.getElementById('moves-counter');
 const tabs = document.querySelectorAll('.js-board-size');
 const winDialog = document.getElementById('win-dialog');
+const form = document.getElementById('user-name-form');
+const username = document.getElementById('user-name-input');
 
 const board = new Board([]);
 const transforms = {};
@@ -80,8 +82,6 @@ startGameButton.addEventListener('click', () => {
 
       if (response.finished) {
         setTimeout(()=> {winDialog.showModal()}, 700)
-        // const playerName = prompt('Победа! Введите ваше имя для добавления в таблицу лидеров!');
-        // state.name = playerName ?? 'Аноним';
         sendUserData(state);
       }
 
@@ -140,9 +140,8 @@ undoButton.addEventListener('click', () => {
 })
 
 
-
-cells.forEach((cell) => {
-  cell.addEventListener('click', () => {
-    cell.style.transform = 'translate(0, -100%)';
-  })
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  state.name = username.value ?? 'Аноним';
+  winDialog.close();
 })
