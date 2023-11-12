@@ -18,6 +18,7 @@ class Board {
 
   randomize(size) {
 
+    this.movesCounter = 0;
     this.board = [];
 
 
