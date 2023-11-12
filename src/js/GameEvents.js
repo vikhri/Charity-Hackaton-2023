@@ -1,5 +1,5 @@
-import Board from "./Board.js";
-import sendUserData from "./Finish.js";
+import Board from './Board.js';
+import sendUserData from './Finish.js';
 
 const startGameButton = document.getElementById('start-game-button');
 const gameBoard = document.getElementById('game-board');
@@ -9,6 +9,7 @@ const tabs = document.querySelectorAll('.js-board-size');
 const winDialog = document.getElementById('win-dialog');
 const form = document.getElementById('user-name-form');
 const username = document.getElementById('user-name-input');
+const cancelButton = document.getElementById('cancel-button');
 
 const board = new Board([]);
 const transforms = {};
@@ -17,15 +18,15 @@ let boardSize = 4;
 tabs.forEach((tab) => {
   tab.addEventListener('change', () => {
     if (tab.checked === true) {
-        boardSize = tab.value;
+      boardSize = tab.value;
     }
   });
-})
+});
 
 const state = {
   name: null,
   time: null,
-  moves: null
+  moves: null,
 };
 
 const render = (state) => {
@@ -38,9 +39,9 @@ const startTimer = (startOver = false) => {
   const updateTimer = () => {
     const currentDate = new Date();
     const passedSeconds = Math.floor((currentDate - startDate) / 1000);
-    state.time = `${Math.floor(passedSeconds / 60)}:${(passedSeconds % 60) < 10 ? '0' : ''}${passedSeconds % 60}`;
+    state.time = `${Math.floor(passedSeconds / 60)}:${passedSeconds % 60 < 10 ? '0' : ''}${passedSeconds % 60}`;
     render(state);
-  }
+  };
   clearInterval(currentInterval);
   currentInterval = setInterval(updateTimer, 1000);
 };
@@ -52,52 +53,46 @@ startGameButton.addEventListener('click', () => {
   movesCounter.innerHTML = board.movesCounter;
 
   const flatBoard = board.board.flat();
-  const className = `cell-${boardSize}x${boardSize}`
+  const className = `cell-${boardSize}x${boardSize}`;
   let content = [];
 
   startGameButton.innerHTML = 'Заново';
 
   flatBoard.forEach((item) => {
     let image = item === 0 ? '' : `<img data-item="${item}" src="/photo/${boardSize}/${item}.jpg" alt="">`;
-    content.push(
-      `<div class="cell ${className}">` +
-      `<div class="image-wrapper">` +
-      image +
-      `</div>` +
-      `</div>`
-    )
+    content.push(`<div class="cell ${className}">` + `<div class="image-wrapper">` + image + `</div>` + `</div>`);
 
-    transforms[item] = [0,0];
-  })
+    transforms[item] = [0, 0];
+  });
 
   gameBoard.innerHTML = content.join('');
 
   gameBoard.querySelectorAll('img').forEach((pic) => {
-    pic.addEventListener("click", ()=> {
-
+    pic.addEventListener('click', () => {
       const item = parseInt(pic.dataset.item);
       const response = board.move(item);
 
       console.log(response);
 
       if (response.finished) {
-        setTimeout(()=> {winDialog.showModal()}, 700)
+        setTimeout(() => {
+          winDialog.showModal();
+        }, 700);
       }
 
       if (response === null) return;
 
-
       switch (response.direction) {
-        case "left":
+        case 'left':
           transforms[item][0] -= 100;
           break;
-        case "right":
+        case 'right':
           transforms[item][0] += 100;
           break;
-        case "up":
+        case 'up':
           transforms[item][1] -= 100;
           break;
-        case "down":
+        case 'down':
           transforms[item][1] += 100;
           break;
       }
@@ -105,11 +100,9 @@ startGameButton.addEventListener('click', () => {
       pic.style.transform = `translate(${transforms[item][0]}%,${transforms[item][1]}%)`;
 
       movesCounter.innerHTML = board.movesCounter;
-
-    })
-  })
-})
-
+    });
+  });
+});
 
 undoButton.addEventListener('click', () => {
   const response = board.rollback();
@@ -119,16 +112,16 @@ undoButton.addEventListener('click', () => {
   const item = response.item;
 
   switch (response.direction) {
-    case "left":
+    case 'left':
       transforms[item][0] -= 100;
       break;
-    case "right":
+    case 'right':
       transforms[item][0] += 100;
       break;
-    case "up":
+    case 'up':
       transforms[item][1] -= 100;
       break;
-    case "down":
+    case 'down':
       transforms[item][1] += 100;
       break;
   }
@@ -137,8 +130,7 @@ undoButton.addEventListener('click', () => {
 
   pic.style.transform = `translate(${transforms[item][0]}%,${transforms[item][1]}%)`;
   movesCounter.innerHTML = board.movesCounter;
-})
-
+});
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -146,8 +138,8 @@ form.addEventListener('submit', (e) => {
   sendUserData(state);
   winDialog.close();
   username.value = '';
-})
+});
 
-
-
-
+cancelButton.addEventListener('click', () => {
+  winDialog.close();
+});
