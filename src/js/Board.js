@@ -163,9 +163,9 @@ class Board {
   }
 
   move(item) {
+    if (this.isFinished()) return null;
+
     const cell = this.findItem(item);
-    // console.log(item);
-    // console.log(cell);
 
     const row = cell[0];
     const col = cell[1];
