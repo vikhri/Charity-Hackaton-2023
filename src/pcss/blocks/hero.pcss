@@ -4,7 +4,7 @@
   --cell-size-5x5: calc((var(--field-size) / 5));
   --cell-size-k: 1;
 
-  --main-window-size: 550px;
+  --main-window-size: 540px;
   --field-size: calc(var(--main-window-size) * 0.85);
 
   --color-back: #4C4848;
@@ -17,7 +17,7 @@
     --main-window-size: 400px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 400px) {
     --main-window-size: 300px;
   }
 }
@@ -29,18 +29,10 @@ body {
   font-size: calc(var(--main-window-size) / 15);
 
   background-color: #f2f2f2;
-
-  @media (max-width: 600px) {
-    font-size: 0.8em;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 0.5em;
-  }
 }
 
 p {
-  line-height: 3.5rem;
+  line-height: 1.65em;
 }
 
 
@@ -72,16 +64,13 @@ p {
 
 .text-block {
   display: flex;
-  /* width: 700px; */
-  width: 553px;
+  width: var(--main-window-size);
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-
   
-  @media (max-width: 320px) {
+  /* @media (max-width: 320px) {
     font-size: 0.8em;
-  }
+  } */
 }
 
 
@@ -102,10 +91,15 @@ p {
 }
 
 /* --- BUTTONS field select --- */
-
 .choose-field-group {
-  display: inline-block;
+  display: flex;
   overflow: hidden;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
 
 .choose-field-group-item {
@@ -120,20 +114,32 @@ p {
 .choose-field-group label {
   display: inline-block;
 	cursor: pointer;
-	padding: 15px 40px;
-	line-height: 34px;
+	padding: 0.6em 1.1em;
+	line-height: 1em;
 	border: 3px solid var(--color-accent-highlight);
-	border-right: none;
+  border-right: none;
 	user-select: none;
+
+  @media (max-width: 600px) {
+    border-right: 3px solid var(--color-accent-highlight);
+  }
 }
 
 .choose-field-group .choose-field-group-item:first-child label {
   border-radius: 6px 0 0 6px;
+
+  @media (max-width: 400px) {
+    border-radius: 6px 6px 0 0;
+  }
 }
 
 .choose-field-group .choose-field-group-item:last-child label {
   border-radius: 0 6px 6px 0;
   border-right: 3px solid var(--color-accent-highlight);
+  
+  @media (max-width: 400px) {
+    border-radius: 0 0 6px 6px;
+  }
 }
 
 .choose-field-group input[type="radio"]:checked + label {
