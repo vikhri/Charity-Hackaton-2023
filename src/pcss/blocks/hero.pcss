@@ -47,7 +47,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 5vw 0;
+  padding: 5vw;
   width: 100%;
   row-gap: 2em;
 }
@@ -60,6 +60,10 @@ p {
   gap: 1.5em;
   width: 100vw;
   max-width: var(--main-width);
+
+  @media (max-width: 1440px) {
+    justify-content: center;
+  }
 }
 
 .main-field .section {
