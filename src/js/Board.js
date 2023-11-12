@@ -113,7 +113,7 @@ class Board {
 
   rollback() {
 
-    if (this.log.length === 0) return null;
+    if (this.log.length === 0 || this.isFinished()) return null;
 
     let lastMove = this.log.pop();
     const item = this.board[lastMove.to[0]][lastMove.to[1]];
