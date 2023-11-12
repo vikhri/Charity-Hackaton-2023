@@ -25,6 +25,7 @@ tabs.forEach((tab) => {
 const state = {
   name: null,
   time: null,
+  moves: null
 };
 
 const render = (state) => {
@@ -81,7 +82,6 @@ startGameButton.addEventListener('click', () => {
 
       if (response.finished) {
         setTimeout(()=> {winDialog.showModal()}, 700)
-        sendUserData(state);
       }
 
       if (response === null) return;
@@ -105,6 +105,7 @@ startGameButton.addEventListener('click', () => {
       pic.style.transform = `translate(${transforms[item][0]}%,${transforms[item][1]}%)`;
 
       movesCounter.innerHTML = board.movesCounter;
+
     })
   })
 })
@@ -142,5 +143,7 @@ undoButton.addEventListener('click', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   state.name = username.value ?? 'Аноним';
+  sendUserData(state);
   winDialog.close();
+  username.value = '';
 })
